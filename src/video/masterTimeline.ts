@@ -69,6 +69,7 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
   gsap.set(a1(entrance, 'halo'), { opacity: 0, scale: 0.7 });
   gsap.set(a1(entrance, 'door-light'), { opacity: 0.15 });
   gsap.set([v('e-kicker'), v('e-sub')], { autoAlpha: 0, y: 24 });
+  gsap.set(v('e-logo'), { autoAlpha: 0, y: 16, scale: 0.92 });
   gsap.set(vAll('e-word'), { autoAlpha: 0, y: 44, rotationX: -70, transformPerspective: 700, transformOrigin: '50% 100%' });
   gsap.set(slots, { autoAlpha: 0, y: 140 });
   gsap.set(vAll('h-text'), { autoAlpha: 0, y: 24 });
@@ -83,32 +84,32 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
   /* ================= Scene 1 — Entrance ================= */
   let at = 0;
   tl.addLabel('entrance', at)
-    .to(black, { autoAlpha: 0, duration: 1.4, ease: 'power1.out' }, at)
-    .to(particles, { alpha: 1, duration: 3, ease: 'none' }, at + 0.3)
-    .to(a(entrance, 'floor'), { autoAlpha: 1, duration: 2.2 }, at + 0.2)
-    .to(a(entrance, 'lamp'), { autoAlpha: 1, y: 0, duration: 1.8 }, at + 0.3)
-    .to(a(entrance, 'beam'), { opacity: 0.75, scaleY: 1, duration: 1.6 }, at + 1.0)
-    .to(door, { autoAlpha: 1, y: 0, scale: 1, duration: 2.2 }, at + 0.8)
-    .to(a1(entrance, 'halo'), { opacity: 0.85, scale: 1, duration: 2.2 }, at + 1.2)
-    .to(header, { autoAlpha: 1, duration: 1 }, at + 1.6)
-    .to(v('e-kicker'), { autoAlpha: 1, y: 0, duration: 0.9 }, at + 2.2)
-    .to(vAll('e-word'), { autoAlpha: 1, y: 0, rotationX: 0, duration: 1.1, stagger: 0.13 }, at + 2.6)
-    .to(v('e-sub'), { autoAlpha: 1, y: 0, duration: 1.1 }, at + 4.4)
-    // slow cinematic push-in toward the door during the whole scene
+    .to(black, { autoAlpha: 0, duration: 0.6, ease: 'power1.out' }, at)
+    .to(particles, { alpha: 1, duration: 1.5, ease: 'none' }, at)
+    .to(a(entrance, 'floor'), { autoAlpha: 1, duration: 1.0 }, at)
+    .to(a(entrance, 'lamp'), { autoAlpha: 1, y: 0, duration: 1.0 }, at)
+    .to(a(entrance, 'beam'), { opacity: 0.75, scaleY: 1, duration: 1.0 }, at + 0.3)
+    .to(door, { autoAlpha: 1, y: 0, scale: 1, duration: 1.1 }, at + 0.1)
+    .to(a1(entrance, 'halo'), { opacity: 0.85, scale: 1, duration: 1.0 }, at + 0.2)
+    // logo + headline: on screen within the first second
+    .to(v('e-logo'), { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 }, at + 0.15)
+    .to(v('e-kicker'), { autoAlpha: 1, y: 0, duration: 0.6 }, at + 0.25)
+    .to(vAll('e-word'), { autoAlpha: 1, y: 0, rotationX: 0, duration: 0.75, stagger: 0.07 }, at + 0.35)
+    .to(v('e-sub'), { autoAlpha: 1, y: 0, duration: 0.7 }, at + 0.75)
+    // slow cinematic push-in toward the door until the camera flight
     .to(entrance, { scale: 1.045, duration: D.entrance + D.doorOpen, ease: 'none' }, at)
-    // the door begins to glow
-    .to(a1(entrance, 'seam'), { scaleX: 2.4, duration: 1.4, ease: 'power2.inOut' }, at + 6.2)
-    .to(a1(entrance, 'door-light'), { opacity: 0.65, duration: 2.6, ease: 'power1.inOut' }, at + 6.2)
-    .to(a1(entrance, 'halo'), { opacity: 1, scale: 1.25, duration: 2.6, ease: 'power1.inOut' }, at + 6.2);
+    // short anticipation: the door begins to glow
+    .to(a1(entrance, 'seam'), { scaleX: 2.4, duration: 0.8, ease: 'power2.inOut' }, at + 0.9)
+    .to(a1(entrance, 'door-light'), { opacity: 0.65, duration: 0.9, ease: 'power1.inOut' }, at + 0.9)
+    .to(a1(entrance, 'halo'), { opacity: 1, scale: 1.25, duration: 0.9, ease: 'power1.inOut' }, at + 0.9);
 
   /* ================= Scene 2a — Door opens ================= */
   at += D.entrance;
   tl.addLabel('doorOpen', at)
-    .to([v('e-kicker'), ...vAll('e-word'), v('e-sub')], { autoAlpha: 0, y: -20, duration: 0.6, stagger: 0.03, ease: EASE.exit }, at + 0.1)
     .to(a1(entrance, 'seam'), { scaleX: 5, duration: 0.4, ease: 'power2.out' }, at + 0.15)
     .to(a1(entrance, 'door-light'), { opacity: 1, duration: 0.6 }, at + 0.2)
-    .to(a1(entrance, 'leaf-l'), { rotationY: MOTION.entrance.leafAngle, duration: 1.7, ease: EASE.cinematic }, at + 0.35)
-    .to(a1(entrance, 'leaf-r'), { rotationY: -MOTION.entrance.leafAngle, duration: 1.7, ease: EASE.cinematic }, at + 0.35)
+    .to(a1(entrance, 'leaf-l'), { rotationY: MOTION.entrance.leafAngle, duration: 1.7, ease: EASE.cinematic }, at + 0.2)
+    .to(a1(entrance, 'leaf-r'), { rotationY: -MOTION.entrance.leafAngle, duration: 1.7, ease: EASE.cinematic }, at + 0.2)
     .to(a1(entrance, 'seam'), { autoAlpha: 0, duration: 0.4 }, at + 0.5)
     .to(a1(entrance, 'halo'), { scale: 1.7, duration: 1.6 }, at + 0.35)
     .to(a(entrance, 'beam'), { opacity: 1, scaleY: 1.2, duration: 1.6 }, at + 0.35);
@@ -116,7 +117,8 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
   /* ================= Scene 2b — Camera flies through ================= */
   at += D.doorOpen;
   tl.addLabel('cameraPush', at)
-    .to(header, { autoAlpha: 0, duration: 0.6 }, at)
+    .to([v('e-logo'), v('e-kicker'), ...vAll('e-word'), v('e-sub')], { autoAlpha: 0, y: -20, duration: 0.5, stagger: 0.02, ease: EASE.exit }, at)
+    .to(header, { autoAlpha: 0, duration: 0.5 }, at)
     .to(entrance, { scale: MOTION.entrance.cameraScale, duration: D.cameraPush - 0.1, ease: EASE.push }, at)
     .to(a(entrance, 'floor'), { autoAlpha: 0, duration: 1.4, ease: EASE.exit }, at + 0.2)
     .to(particles, { warp: 1, duration: D.cameraPush, ease: 'power3.in' }, at)

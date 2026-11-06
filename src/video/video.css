@@ -86,39 +86,66 @@ body {
 /* ---- Scene 1 — entrance ---- */
 .v-entrance-copy {
   position: absolute;
-  top: 150px;
+  top: 56px;
   inset-inline: 0;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   text-align: center;
+}
+.v-entrance-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+/* official logo image: fixed height, natural proportions */
+.v-entrance-logo img {
+  height: 104px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 28px rgb(155 92 255 / 0.55));
+}
+.v-wordmark-md .wordmark__top {
+  font-size: 46px;
+}
+.v-wordmark-md .wordmark__bottom {
+  gap: 10px;
+  font-size: 40px;
+}
+.v-wordmark-md .wordmark__pix {
+  grid-template-columns: repeat(2, 12px);
+  gap: 3px;
+}
+.v-wordmark-md .wordmark__pix i {
+  width: 12px;
+  height: 12px;
 }
 .v-entrance-title {
   margin: 0;
   max-width: 15ch;
-  font-size: 92px;
+  font-size: 80px;
   line-height: 1.2;
 }
 .v-entrance-sub {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   font-family: 'Alexandria', sans-serif;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 30px;
   color: var(--lavender);
   text-shadow: 0 0 24px rgb(155 92 255 / 0.6);
 }
 .v-door-area {
   position: absolute;
   inset-inline: 0;
-  bottom: 70px;
+  bottom: 50px;
   z-index: 2;
   display: flex;
   justify-content: center;
 }
 .v-door-area .portal-wrap {
-  height: 470px;
+  height: 460px;
   cursor: default;
 }
 
@@ -297,7 +324,10 @@ body {
   text-align: center;
 }
 .v-end__logo img {
-  height: 220px;
+  height: 240px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 40px rgb(155 92 255 / 0.55));
 }
 .v-wordmark-xl .wordmark {
   filter: drop-shadow(0 0 40px rgb(155 92 255 / 0.65));
@@ -426,6 +456,8 @@ body {
 }
 .v-header__logo {
   height: 64px;
+  width: auto;
+  object-fit: contain;
 }
 
 .v-veil {

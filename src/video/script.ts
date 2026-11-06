@@ -27,23 +27,36 @@ export const TEXT = {
 } as const;
 
 /**
+ * Committee taglines used in the VIDEO (the interactive site keeps its own
+ * taglines in src/data/committees.ts).
+ */
+export const TAGLINES = {
+  media: 'صوت طويق وصورتها',
+  hr: 'قوة الفريق تبدأ بأفراده',
+  'quality-of-life': 'قلب الفريق ونبضه',
+  sports: 'روح التحدي والمنافسة',
+  relations: 'نصنع العلاقات ونبني الفرص',
+} as const;
+
+/**
  * Optional official logo files. Put the images in /public and set the
  * paths, e.g. uquLogo: './brand/uqu-logo.png'. Empty = text branding.
  */
 export const BRAND = {
+  /** Official Tuwaiq Club logo — used in the opening, the top bar and the end card. */
   tuwaiqLogo: '',
   uquLogo: '',
 };
 
 /**
  * Length (seconds) of each block of the story, in order.
- * The total video length is the sum (≈ 47.7 s by default).
+ * The total video length is the sum (≈ 40.3 s by default).
  * Fine-grained offsets inside a block live in masterTimeline.ts.
  */
 export const DURATIONS = {
-  entrance: 9.2, // dark → door → headline → subline → door glows
+  entrance: 1.8, // logo + headline (<1 s) → short glow → door opens at 1.8 s
   doorOpen: 1.6, // leaves swing open, light pours out
-  cameraPush: 2.4, // camera flies through the doorway
+  cameraPush: 1.9, // camera flies through the doorway
   hallReveal: 3.8, // land in the hall, five doors rise
   perCommittee: 2.9, // highlight of EACH committee (×5)
   pullBack: 1.8, // camera returns to the full composition

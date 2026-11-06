@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
-import { COMMITTEES } from '../data/committees';
+import { COMMITTEES as SITE_COMMITTEES } from '../data/committees';
 import { Backdrop } from '../components/Backdrop';
 import { MainDoor } from '../components/MainDoor';
 import { CommitteeDoor } from '../components/CommitteeDoor';
 import { Wordmark } from '../components/Wordmark';
-import { BRAND, TEXT, VIDEO } from './script';
+import { BRAND, TAGLINES, TEXT, VIDEO } from './script';
 import { createParticles, type ParticleState } from './particles';
 import { buildMasterTimeline } from './masterTimeline';
 
@@ -17,6 +17,8 @@ declare global {
 }
 
 const noop = () => {};
+/** Same committees as the website, with the video-specific taglines. */
+const COMMITTEES = SITE_COMMITTEES.map((c) => ({ ...c, tagline: TAGLINES[c.id] }));
 const words = (text: string, key = 'm-word') =>
   text.split(' ').map((w, i, arr) => (
     <span key={i}>
@@ -115,6 +117,9 @@ export default function VideoApp() {
         <div data-v="entrance" className="v-world">
           <Backdrop lamp variant="entrance" />
           <div className="v-entrance-copy">
+            <div data-v="e-logo" className="v-entrance-logo">
+              {BRAND.tuwaiqLogo ? <img src={BRAND.tuwaiqLogo} alt={TEXT.club} /> : <Wordmark className="v-wordmark-md" />}
+            </div>
             <p data-v="e-kicker" className="kicker v-kicker">
               <span className="kicker__pix" aria-hidden="true" />
               {TEXT.kicker}
