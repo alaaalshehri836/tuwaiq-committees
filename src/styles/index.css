@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+@import './components.css';
+
+/* ============================================================
+   Design tokens — Tuwaiq Club palette.
+   Change a color here and every Tailwind utility (bg-tq-*, text-tq-*)
+   and custom rule below picks it up.
+   (JS copy for the canvas: src/theme/palette.ts)
+   ============================================================ */
+@theme {
+  --color-tq-ink: #080611;
+  --color-tq-deep: #190b3d;
+  --color-tq-violet: #2d1168;
+  --color-tq-purple: #6f2cff;
+  --color-tq-electric: #9b5cff;
+  --color-tq-lavender: #c5a3ff;
+  --color-tq-cyan: #35d9ff;
+  --color-tq-snow: #f5f2ff;
+
+  --font-sans: 'IBM Plex Sans Arabic', 'Alexandria', system-ui, sans-serif;
+  --font-display: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+}
+
