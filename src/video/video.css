@@ -1,0 +1,449 @@
+/* ============================================================
+   Version B — cinematic video stage (fixed 1920×1080).
+   Reuses every component style from src/styles/components.css;
+   this file only adds the video layout and overrides the few
+   viewport-relative sizes (vw/svh) with fixed pixels so the frame
+   looks identical in any browser window and in the export.
+   ============================================================ */
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+.v-viewport {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+}
+.v-stage {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ink);
+  transform-origin: center;
+  pointer-events: none;
+  user-select: none;
+}
+/* GSAP owns every movement — CSS transitions would blur frame-exact seeking. */
+.v-stage *,
+.v-stage *::before,
+.v-stage *::after {
+  transition: none !important;
+}
+.is-rendering .v-viewport {
+  place-items: start;
+}
+
+.v-world {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* ---- fixed-pixel overrides of viewport-relative component sizes ---- */
+.v-stage .lamp__cord {
+  height: 78px;
+}
+.v-stage .lamp__head {
+  top: 78px;
+  width: 84px;
+  height: 26px;
+}
+.v-stage .lamp__cone {
+  top: 104px;
+  width: 1250px;
+  height: 980px;
+}
+.v-stage .floor {
+  height: 40%;
+}
+.v-stage .slot__beam {
+  height: 1300px;
+}
+.v-stage .slot .cdoor {
+  opacity: 1;
+  transform: none;
+}
+.v-stage .cdoor__name {
+  font-size: 19px;
+}
+.v-stage .cdoor__tag {
+  font-size: 15px;
+}
+.v-stage .cdoor__num {
+  font-size: 14px;
+}
+.v-kicker {
+  font-size: 22px;
+}
+
+/* ---- Scene 1 — entrance ---- */
+.v-entrance-copy {
+  position: absolute;
+  top: 150px;
+  inset-inline: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+.v-entrance-title {
+  margin: 0;
+  max-width: 15ch;
+  font-size: 92px;
+  line-height: 1.2;
+}
+.v-entrance-sub {
+  margin: 6px 0 0;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: var(--lavender);
+  text-shadow: 0 0 24px rgb(155 92 255 / 0.6);
+}
+.v-door-area {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 70px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+.v-door-area .portal-wrap {
+  height: 470px;
+  cursor: default;
+}
+
+/* ---- Scene 2/3 — hall ---- */
+.v-hall-copy {
+  position: absolute;
+  top: 150px;
+  inset-inline: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.v-hall-title {
+  margin: 0;
+  font-size: 76px;
+  line-height: 1.25;
+}
+.v-track {
+  --door-w: 228px;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 70px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 50px;
+  perspective: 1500px;
+}
+
+/* ---- overlays ---- */
+.v-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  mix-blend-mode: screen;
+}
+.v-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(38% 60% at 68% 48%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 72%),
+    radial-gradient(60% 40% at 50% 100%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%);
+}
+.v-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  background: linear-gradient(to left, transparent 30%, rgb(8 6 17 / 0.72) 58%, rgb(8 6 17 / 0.9) 100%);
+}
+
+/* committee caption (left side, door sits on the right third) */
+.v-caption {
+  --accent: var(--electric);
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  left: 150px;
+  width: 760px;
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.v-caption__icon {
+  width: 132px;
+  height: 132px;
+  margin-bottom: 34px;
+  perspective: 600px;
+}
+.v-caption__icon .emblem3d__tile {
+  border-radius: 30px;
+}
+.v-caption__num {
+  margin: 0 0 18px;
+  padding: 6px 14px;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  background: var(--accent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+.v-caption__name {
+  margin: 0;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 800;
+  font-size: 84px;
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--snow);
+  text-shadow:
+    0 1px 0 color-mix(in srgb, var(--accent) 30%, white),
+    0 2px 0 color-mix(in srgb, var(--accent) 70%, white),
+    0 4px 0 var(--accent),
+    0 6px 0 color-mix(in srgb, var(--accent) 75%, var(--violet)),
+    0 8px 0 color-mix(in srgb, var(--accent) 50%, var(--violet)),
+    0 10px 0 var(--violet),
+    0 18px 30px rgb(8 6 17 / 0.85),
+    0 0 50px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.v-caption__tag {
+  margin: 22px 0 0;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 500;
+  font-size: 36px;
+  color: color-mix(in srgb, var(--accent) 60%, white);
+}
+.v-caption__bar {
+  display: block;
+  width: 260px;
+  height: 6px;
+  margin-top: 30px;
+  transform-origin: right center;
+  background: linear-gradient(to left, var(--accent), transparent);
+  box-shadow: 0 0 16px var(--accent);
+}
+
+/* finale messages (above the five doors) */
+.v-message {
+  position: absolute;
+  z-index: 8;
+  top: 110px;
+  inset-inline: 0;
+  height: 330px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.v-message h2 {
+  margin: 0;
+}
+.v-message__md {
+  font-size: 84px;
+  line-height: 1.25;
+}
+.v-message__lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+  font-size: 104px;
+  line-height: 1.2;
+}
+.v-message__xl {
+  font-size: 138px;
+  line-height: 1.15;
+}
+.v-open__pix {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  background: var(--electric);
+  box-shadow: 0 0 22px var(--electric);
+}
+.v-open__pix--cyan {
+  background: var(--cyan);
+  box-shadow: 0 0 22px var(--cyan);
+}
+
+/* end card */
+.v-end {
+  position: absolute;
+  z-index: 9;
+  inset: 0 0 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  text-align: center;
+}
+.v-end__logo img {
+  height: 220px;
+}
+.v-wordmark-xl .wordmark {
+  filter: drop-shadow(0 0 40px rgb(155 92 255 / 0.65));
+}
+.v-wordmark-xl .wordmark__top {
+  font-size: 150px;
+}
+.v-wordmark-xl .wordmark__bottom {
+  gap: 26px;
+  font-size: 128px;
+}
+.v-wordmark-xl .wordmark__pix {
+  grid-template-columns: repeat(2, 34px);
+  gap: 8px;
+}
+.v-wordmark-xl .wordmark__pix i {
+  width: 34px;
+  height: 34px;
+}
+.v-end__uni {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 500;
+  font-size: 34px;
+  color: var(--lavender);
+}
+.v-end__uni img {
+  height: 72px;
+}
+.v-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+}
+.v-end__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: 8px 0 0;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--snow);
+  background: rgb(25 11 61 / 0.75);
+  border: 1px solid rgb(155 92 255 / 0.5);
+  box-shadow: 0 0 40px rgb(111 44 255 / 0.35);
+}
+.v-end__open .status-pill__dot {
+  width: 14px;
+  height: 14px;
+}
+.v-end__cta {
+  position: relative;
+  margin: 0;
+  padding: 24px 56px;
+  border-radius: 22px;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 800;
+  font-size: 46px;
+  color: #fff;
+  background: linear-gradient(135deg, #a46dff, #6f2cff);
+  box-shadow:
+    inset 0 2px 0 rgb(255 255 255 / 0.35),
+    inset 0 0 0 1px rgb(255 255 255 / 0.18),
+    0 10px 0 color-mix(in srgb, #6f2cff 45%, var(--ink)),
+    0 26px 70px -10px rgb(111 44 255 / 0.85);
+}
+.v-end__cta::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  inset-inline-start: -9px;
+  width: 18px;
+  height: 18px;
+  background: var(--cyan);
+  box-shadow: 0 0 18px var(--cyan);
+}
+
+/* persistent branding bar */
+.v-header {
+  position: absolute;
+  z-index: 10;
+  top: 52px;
+  inset-inline: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.v-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.v-header .wordmark__top {
+  font-size: 30px;
+}
+.v-header .wordmark__bottom {
+  font-size: 26px;
+}
+.v-header .wordmark__pix {
+  grid-template-columns: repeat(2, 8px);
+  gap: 2px;
+}
+.v-header .wordmark__pix i {
+  width: 8px;
+  height: 8px;
+}
+.v-header__sep {
+  width: 1px;
+  height: 52px;
+  background: rgb(255 255 255 / 0.18);
+}
+.v-header__uni {
+  font-size: 22px;
+  line-height: 1.35;
+  color: rgb(197 163 255 / 0.85);
+}
+.v-header__uni span {
+  color: rgb(245 242 255 / 0.5);
+}
+.v-header__logo {
+  height: 64px;
+}
+
+.v-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: radial-gradient(circle at 50% 50%, #fff 0%, #d8c2ff 14%, var(--electric) 38%, #3a148f 75%, var(--ink) 100%);
+}
+.v-black {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+}
+
+/* The camera pans far left/right during the close-ups — extend the hall
+   backdrop sideways so its edges never enter the frame. */
+[data-v='hall'] > .backdrop {
+  left: -70%;
+  right: -70%;
+}

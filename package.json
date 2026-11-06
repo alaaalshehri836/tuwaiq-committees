@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:video": "vite --open /video.html",
+    "render:video": "vite build && node scripts/render-video.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.1",

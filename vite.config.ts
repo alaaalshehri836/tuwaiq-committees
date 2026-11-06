@@ -6,4 +6,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   // Relative base so the build works from any static host / sub-folder.
   base: './',
+  build: {
+    rollupOptions: {
+      input: {
+        // Version A — interactive website
+        main: 'index.html',
+        // Version B — cinematic video (preview + render source)
+        video: 'video.html',
+      },
+    },
+  },
 });

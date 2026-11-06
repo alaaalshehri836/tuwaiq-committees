@@ -1,5 +1,80 @@
 # Tuwaiq Club | UQU — Administrative Committees Recruitment
 
+This project contains **two independent versions** built on the same design system:
+
+| | Version A — Interactive website | Version B — Cinematic video |
+|---|---|---|
+| Entry | `index.html` → `src/App.tsx` | `video.html` → `src/video/VideoApp.tsx` |
+| Behavior | Visitors open doors and pick a committee | Plays a ~48 s story automatically, no interaction |
+| Output | Static website (`dist/`) | MP4 files in `video/` |
+
+Version B reuses Version A's components, styles, palette and committee data without modifying them. The interactive site is also backed up as git tag `v1-interactive` and branch `interactive-website`.
+
+---
+
+## Version B — Cinematic video
+
+### Files
+- `video/tuwaiq-committees-1080p.mp4` — master: 1920×1080, 30 fps, H.264 High, yuv420p, ~48 s, no audio.
+- `video/tuwaiq-committees-web-720p.mp4` — lighter version for websites, with fast start for streaming.
+- `video/poster.jpg` — poster frame.
+- `video/embed-example.html` — ready-to-copy `<video>` embed.
+
+### Preview & render
+```bash
+npm run dev:video        # live preview at http://localhost:5173/video.html
+                         #   ?t=20  start at 20 s   ·   ?loop  loop forever
+                         #   Space = pause, R = restart (preview only)
+npm run render:video     # build + render every frame → video/*.mp4 + poster
+npm run render:video -- --from 17 --to 26 --out video/test.mp4   # render a section only
+```
+Rendering requires **FFmpeg** on your PATH and **Playwright's Chromium**. To install Playwright:
+```bash
+npm i -D playwright && npx playwright install chromium
+```
+
+**How rendering works.** The video is one paused GSAP master timeline. For each frame, the render script calls `window.__seek(t)`, which sets four things to exactly time `t`:
+- the GSAP timeline
+- the seeded particle canvas
+- every CSS keyframe animation
+- (CSS transitions are disabled in the video)
+
+It then takes a lossless screenshot and pipes it into FFmpeg (x264, CRF 16). Because nothing depends on real time, the output has no dropped or missing frames and is identical on every run.
+
+### Edit the video
+| What | Where |
+|---|---|
+| All on-screen texts | `src/video/script.ts` → `TEXT` |
+| Length of each scene (total length = sum) | `src/video/script.ts` → `DURATIONS` |
+| Official logo images (optional) | Put files in `public/`, set `BRAND.tuwaiqLogo` / `BRAND.uquLogo` in `src/video/script.ts` |
+| Committee names, taglines, colors, icons | `src/data/committees.ts` and `src/theme/palette.ts`. These are shared with the website. |
+| Camera moves, effects, offsets inside scenes | `src/video/masterTimeline.ts` (one section per scene) |
+| Video layout & type sizes | `src/video/video.css` |
+| Particles | `src/video/particles.ts` |
+
+After editing, run `npm run render:video` again.
+
+### Storyboard (default timing)
+| Time | Scene |
+|---|---|
+| 0–9.2 s | Entrance: door rises, «فتح التسجيل في اللجان الإدارية», «اكتشف الفرص التي تنتظرك في طويق», door glows |
+| 9.2–13.2 s | Door opens, camera flies through the light |
+| 13.2–17 s | The hall: five doors rise |
+| 17–31.5 s | Each committee in turn: camera close-up, accent light, name + tagline |
+| 31.5–42.3 s | Pull back · «خمسة مسارات، وفرص متعددة للمساهمة» · «كن جزءًا من طويق» · «التسجيل مفتوح الآن» |
+| 42.3–48.2 s | End card: Tuwaiq Club + UQU branding, «اختر لجنتك وابدأ رحلتك معنا», fade out |
+
+### Embed on a website
+```html
+<video src="tuwaiq-committees-web-720p.mp4" poster="poster.jpg"
+       autoplay muted playsinline loop controls preload="metadata"
+       style="width:100%;aspect-ratio:16/9"></video>
+```
+
+---
+
+## Version A — Interactive website
+
 An Arabic-first (RTL) interactive site: a glowing door opens onto a hall with five committee doors. Each door leads to a committee page with a «انضم إلى اللجنة» button.
 
 **Stack:** React 19 · TypeScript · Vite · Tailwind CSS v4 · GSAP · Lucide React. The 3D effects use CSS and GSAP, with no Three.js or WebGL.
