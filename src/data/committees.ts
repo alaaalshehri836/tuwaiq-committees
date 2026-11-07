@@ -53,7 +53,7 @@ export const COMMITTEES: Committee[] = [
     id: 'hr',
     order: 2,
     name: 'لجنة الموارد البشرية',
-    tagline: 'قلب الفريق ونبضه',
+    tagline: 'قوة الفريق تبدأ بأفراده',
     description:
       'تبني فريقًا متماسكًا ومتحفّزًا، وتعتني بأعضاء النادي من لحظة انضمامهم حتى يصنعوا أثرهم.',
     responsibilities: [
@@ -70,7 +70,7 @@ export const COMMITTEES: Committee[] = [
     id: 'quality-of-life',
     order: 3,
     name: 'لجنة جودة الحياة',
-    tagline: 'بيئة ملهمة وتجربة أجمل',
+    tagline: 'قلب الفريق ونبضه',
     description:
       'تصنع لحظات تُثري تجربة الأعضاء والطلاب، وتوازن بين الإنجاز والراحة داخل مجتمع النادي.',
     responsibilities: [

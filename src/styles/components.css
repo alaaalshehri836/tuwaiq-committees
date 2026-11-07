@@ -304,6 +304,18 @@ a {
   box-shadow: 0 0 6px var(--cyan);
 }
 
+/* Official logo badge — height-driven so its proportions are always preserved */
+.brand-logo {
+  display: block;
+  height: clamp(46px, 6.2svh, 60px);
+  width: auto;
+  border-radius: 18%;
+  border: 1px solid rgb(197 163 255 / 0.45);
+  box-shadow:
+    0 0 0 1px rgb(111 44 255 / 0.4),
+    0 0 20px rgb(155 92 255 / 0.5);
+}
+
 .status-pill {
   display: inline-flex;
   align-items: center;

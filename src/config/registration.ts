@@ -12,12 +12,16 @@ import type { CommitteeId } from '../types';
  *  the browser console and a hint appears on the page in dev mode.
  * ============================================================
  */
+/** Official registration form (one form for all committees). */
+const REGISTRATION_FORM_URL =
+  'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=-1egedWw3USPkAv3FR9cPzBy_Z29aVlAl8BB1IXwxONUQks0WkQxOUxYMlA0WlVNMFM0WUZYNUg0SC4u';
+
 export const REGISTRATION_URLS: Record<CommitteeId, string> = {
-  media: 'https://example.com/REPLACE-ME/media-committee-form',
-  hr: 'https://example.com/REPLACE-ME/hr-committee-form',
-  'quality-of-life': 'https://example.com/REPLACE-ME/quality-of-life-committee-form',
-  sports: 'https://example.com/REPLACE-ME/sports-committee-form',
-  relations: 'https://example.com/REPLACE-ME/relations-committee-form',
+  media: REGISTRATION_FORM_URL,
+  hr: REGISTRATION_FORM_URL,
+  'quality-of-life': REGISTRATION_FORM_URL,
+  sports: REGISTRATION_FORM_URL,
+  relations: REGISTRATION_FORM_URL,
 };
 
 export const isPlaceholderUrl = (url: string) => url.includes('REPLACE-ME');

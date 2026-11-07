@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Wordmark } from './Wordmark';
+import { BrandLogo } from './BrandLogo';
 
 interface Props {
   onHome?: () => void;
@@ -12,7 +12,7 @@ export function SiteHeader({ onHome, start, anim = 'header' }: Props) {
   return (
     <header className="site-header">
       <div data-a={anim} className="flex items-center gap-3">
-        <Wordmark onClick={onHome} />
+        <BrandLogo onClick={onHome} />
         <span className="hidden h-7 w-px bg-white/15 sm:block" aria-hidden="true" />
         <span className="hidden text-xs leading-tight text-tq-lavender/80 sm:block">
           جامعة أم القرى
