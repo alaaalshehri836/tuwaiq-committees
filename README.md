@@ -5,7 +5,7 @@ This project contains **two independent versions** built on the same design syst
 | | Version A — Interactive website | Version B — Cinematic video |
 |---|---|---|
 | Entry | `index.html` → `src/App.tsx` | `video.html` → `src/video/VideoApp.tsx` |
-| Behavior | Visitors open doors and pick a committee | Plays a ~48 s story automatically, no interaction |
+| Behavior | Visitors open doors and pick a committee | Plays a ~40 s story automatically, no interaction |
 | Output | Static website (`dist/`) | MP4 files in `video/` |
 
 Version B reuses Version A's components, styles, palette and committee data without modifying them. The interactive site is also backed up as git tag `v1-interactive` and branch `interactive-website`.
@@ -15,7 +15,7 @@ Version B reuses Version A's components, styles, palette and committee data with
 ## Version B — Cinematic video
 
 ### Files
-- `video/tuwaiq-committees-1080p.mp4` — master: 1920×1080, 30 fps, H.264 High, yuv420p, ~48 s, no audio.
+- `video/tuwaiq-committees-1080p.mp4` — master: 1920×1080, 30 fps, H.264 High, yuv420p, 40.3 s, no audio.
 - `video/tuwaiq-committees-web-720p.mp4` — lighter version for websites, with fast start for streaming.
 - `video/poster.jpg` — poster frame.
 - `video/embed-example.html` — ready-to-copy `<video>` embed.
@@ -46,7 +46,8 @@ It then takes a lossless screenshot and pipes it into FFmpeg (x264, CRF 16). Bec
 |---|---|
 | All on-screen texts | `src/video/script.ts` → `TEXT` |
 | Length of each scene (total length = sum) | `src/video/script.ts` → `DURATIONS` |
-| Official logo images (optional) | Put files in `public/`, set `BRAND.tuwaiqLogo` / `BRAND.uquLogo` in `src/video/script.ts` |
+| Committee taglines (video only) | `src/video/script.ts` → `TAGLINES` |
+| Logos | `public/brand/tuwaiq-logo.png` is the official upload; `tuwaiq-logo-badge.png` is a pixel-exact crop used by the video (`BRAND.tuwaiqLogo`). An optional UQU logo goes in `BRAND.uquLogo`. |
 | Committee names, taglines, colors, icons | `src/data/committees.ts` and `src/theme/palette.ts`. These are shared with the website. |
 | Camera moves, effects, offsets inside scenes | `src/video/masterTimeline.ts` (one section per scene) |
 | Video layout & type sizes | `src/video/video.css` |
@@ -57,12 +58,12 @@ After editing, run `npm run render:video` again.
 ### Storyboard (default timing)
 | Time | Scene |
 |---|---|
-| 0–9.2 s | Entrance: door rises, «فتح التسجيل في اللجان الإدارية», «اكتشف الفرص التي تنتظرك في طويق», door glows |
-| 9.2–13.2 s | Door opens, camera flies through the light |
-| 13.2–17 s | The hall: five doors rise |
-| 17–31.5 s | Each committee in turn: camera close-up, accent light, name + tagline |
-| 31.5–42.3 s | Pull back · «خمسة مسارات، وفرص متعددة للمساهمة» · «كن جزءًا من طويق» · «التسجيل مفتوح الآن» |
-| 42.3–48.2 s | End card: Tuwaiq Club + UQU branding, «اختر لجنتك وابدأ رحلتك معنا», fade out |
+| 0–1.8 s | Entrance: official logo, «فتح التسجيل في اللجان الإدارية», «اكتشف الفرص التي تنتظرك في طويق» (all within ~1 s), door glows |
+| 1.8–5.3 s | Door opens (from ~2 s), camera flies through the light |
+| 5.3–9.1 s | The hall: five doors rise |
+| 9.1–23.6 s | Each committee in turn: camera close-up, accent light, name + tagline |
+| 23.6–34.4 s | Pull back · «خمسة مسارات، وفرص متعددة للمساهمة» · «كن جزءًا من طويق» · «التسجيل مفتوح الآن» |
+| 34.4–40.3 s | End card: official logo, UQU branding, «اختر لجنتك وابدأ رحلتك معنا», fade out |
 
 ### Embed on a website
 ```html

@@ -43,8 +43,12 @@ export const TAGLINES = {
  * paths, e.g. uquLogo: './brand/uqu-logo.png'. Empty = text branding.
  */
 export const BRAND = {
-  /** Official Tuwaiq Club logo — used in the opening, the top bar and the end card. */
-  tuwaiqLogo: '',
+  /**
+   * Official Tuwaiq Club logo — used in the opening, the top bar and the end card.
+   * public/brand/tuwaiq-logo.png is the original upload; the badge file is a
+   * pixel-exact crop of it (excess purple canvas trimmed, nothing redrawn).
+   */
+  tuwaiqLogo: './brand/tuwaiq-logo-badge.png',
   uquLogo: '',
 };
 

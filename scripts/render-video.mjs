@@ -119,6 +119,6 @@ if (FULL) {
   ]);
   console.log(`✓ ${web} (${(statSync(web).size / 1e6).toFixed(1)} MB)`);
   const poster = resolve(dir, 'poster.jpg');
-  await run(FFMPEG, ['-y', '-loglevel', 'error', '-ss', String(args.poster ?? 35.0), '-i', OUT, '-frames:v', '1', '-q:v', '2', poster]);
+  await run(FFMPEG, ['-y', '-loglevel', 'error', '-ss', String(args.poster ?? 27.0), '-i', OUT, '-frames:v', '1', '-q:v', '2', poster]);
   console.log(`✓ ${poster}`);
 }
