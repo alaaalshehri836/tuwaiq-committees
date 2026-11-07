@@ -14,7 +14,7 @@ import type { CommitteeId } from '../types';
  */
 /** Official registration form (one form for all committees). */
 const REGISTRATION_FORM_URL =
-  'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=-1egedWw3USPkAv3FR9cPzBy_Z29aVlAl8BB1IXwxONUQks0WkQxOUxYMlA0WlVNMFM0WUZYNUg0SC4u';
+  'https://forms.cloud.microsoft/r/m4mBDTCTsG';
 
 export const REGISTRATION_URLS: Record<CommitteeId, string> = {
   media: REGISTRATION_FORM_URL,
