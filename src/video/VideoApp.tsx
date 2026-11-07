@@ -68,6 +68,7 @@ export default function VideoApp() {
       const draw = createParticles(canvas.current!, state);
       tl = buildMasterTimeline(stage.current!, state);
       window.__videoDuration = tl.duration();
+      (window as unknown as { __videoLabels: Record<string, number> }).__videoLabels = { ...tl.labels };
 
       if (RENDER) {
         document.documentElement.classList.add('is-rendering');

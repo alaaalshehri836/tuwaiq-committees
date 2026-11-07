@@ -20,6 +20,21 @@ Version B reuses Version A's components, styles, palette and committee data with
 - `video/poster.jpg` — poster frame.
 - `video/embed-example.html` — ready-to-copy `<video>` embed.
 
+### Sound (original score + sound design)
+- `video/tuwaiq-committees-1080p-audio.mp4`: **final film with sound** (H.264 + AAC 256 kb/s, 48 kHz stereo).
+- `video/tuwaiq-committees-web-720p-audio.mp4`: web version with sound (AAC 160 kb/s).
+- `video/audio/tuwaiq-soundtrack.wav`: the mastered soundtrack on its own (24-bit, 48 kHz).
+- The silent `*-1080p.mp4` / `*-720p.mp4` files are kept unchanged. The audio versions copy their video stream bit-for-bit.
+
+**Licensing.** All music and effects are synthesized from scratch by `scripts/sound/compose.py`, with no samples and no third-party music. The soundtrack is therefore original and royalty-free.
+
+**How it stays in sync.** The master timeline contains `cue:*` labels at the exact visual moments: logo, latch, door leaves, camera flight, each committee reveal, registration message and end card. `scripts/export-cues.mjs` reads those times from the running timeline, and every sound is placed on them. The bar length of the music equals one committee highlight, so the beat locks to the picture. If you change the video timing, re-run the audio step and it follows automatically.
+
+```bash
+npm run render:audio     # after render:video — rebuilds soundtrack + muxes the *-audio.mp4 files
+```
+Mix levels (`LEVEL`) and loudness targets (`TARGET_LUFS` = -14, `TRUE_PEAK` = -1.5 dBTP) are at the top of `scripts/sound/compose.py`. It needs Python 3 with `numpy` and `scipy`.
+
 ### Preview & render
 ```bash
 npm run dev:video        # live preview at http://localhost:5173/video.html
@@ -52,6 +67,7 @@ It then takes a lossless screenshot and pipes it into FFmpeg (x264, CRF 16). Bec
 | Camera moves, effects, offsets inside scenes | `src/video/masterTimeline.ts` (one section per scene) |
 | Video layout & type sizes | `src/video/video.css` |
 | Particles | `src/video/particles.ts` |
+| Music & sound effects | `scripts/sound/compose.py` (one section per scene) |
 
 After editing, run `npm run render:video` again.
 

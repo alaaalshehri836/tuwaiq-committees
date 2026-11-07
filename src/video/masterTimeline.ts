@@ -80,6 +80,8 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
   Object.assign(particles, { alpha: 0, warp: 0, tint: '' });
 
   const tl = gsap.timeline({ paused: true, defaults: { ease: EASE.enter } });
+  /** Sound-design markers (labels only — no visual effect). Read by scripts/export-cues.mjs. */
+  const cue = (name: string, time: number) => tl.addLabel(`cue:${name}`, time);
 
   /* ================= Scene 1 — Entrance ================= */
   let at = 0;
@@ -105,6 +107,11 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
 
   /* ================= Scene 2a — Door opens ================= */
   at += D.entrance;
+  cue('logo', 0.15);
+  cue('headline', 0.35);
+  cue('glow', 0.9);
+  cue('seam', at + 0.15);
+  cue('leaves', at + 0.2);
   tl.addLabel('doorOpen', at)
     .to(a1(entrance, 'seam'), { scaleX: 5, duration: 0.4, ease: 'power2.out' }, at + 0.15)
     .to(a1(entrance, 'door-light'), { opacity: 1, duration: 0.6 }, at + 0.2)
@@ -116,6 +123,8 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
 
   /* ================= Scene 2b — Camera flies through ================= */
   at += D.doorOpen;
+  cue('push', at);
+  cue('veil', at + D.cameraPush - 1.05);
   tl.addLabel('cameraPush', at)
     .to([v('e-logo'), v('e-kicker'), ...vAll('e-word'), v('e-sub')], { autoAlpha: 0, y: -20, duration: 0.5, stagger: 0.02, ease: EASE.exit }, at)
     .to(header, { autoAlpha: 0, duration: 0.5 }, at)
@@ -126,6 +135,7 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
 
   /* ================= Scene 2c — Inside: the hall appears ================= */
   at += D.cameraPush;
+  COMMITTEES.forEach((_, i) => cue(`doorRise-${i}`, at + 0.5 + i * 0.15));
   tl.addLabel('hall', at)
     .set(entrance, { autoAlpha: 0 }, at)
     .set(hall, { autoAlpha: 1 }, at)
@@ -148,6 +158,8 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
     const prev = i - 1;
     const cap = captions[i];
     const others = slots.filter((_, j) => j !== i);
+    cue(`move-${i}`, t);
+    cue(`reveal-${i}`, t + 0.45);
     tl.addLabel(`committee-${c.id}`, t)
       // camera glides to the door (door on the right third, caption on the left)
       .to(hall, { ...cam(1.55, doorCenters[i].x, doorCenters[i].y, 1310, 520), duration: 1.15, ease: EASE.cinematic }, t)
@@ -177,6 +189,8 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
 
   /* ================= Scene 4a — Pull back: all five doors ================= */
   at += COMMITTEES.length * P;
+  cue('pullBack', at);
+  cue('leavesAll', at + 0.5);
   const last = COMMITTEES.length - 1;
   tl.addLabel('finale', at)
     .to(v('shade'), { autoAlpha: 0, duration: 0.8 }, at)
@@ -198,15 +212,19 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
       .to(el, { autoAlpha: 0, y: -24, duration: 0.45, ease: EASE.exit }, start + length - 0.45);
   };
   tl.addLabel('paths', at);
+  cue('paths', at);
   message('paths', at, D.paths);
 
   at += D.paths;
   tl.addLabel('join', at);
+  cue('join', at);
+  cue('lightsFlash', at + 0.3);
   message('join', at, D.join);
   tl.to(lights, { opacity: 1, duration: 0.6, stagger: 0.08 }, at + 0.3).to(beams, { opacity: 0.75, duration: 0.6, stagger: 0.08 }, at + 0.3);
 
   at += D.join;
   tl.addLabel('open', at);
+  cue('registration', at);
   message('open', at, D.open);
   tl.to(leaves, { rotationY: -42, duration: 1.2, stagger: 0.08, ease: EASE.cinematic }, at + 0.2)
     .fromTo(v('open').querySelectorAll('.v-open__pix'), { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.7, stagger: 0.1, ease: 'back.out(2)' }, at + 0.4);
@@ -220,6 +238,9 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
     .fromTo(vAll('end-item'), { autoAlpha: 0, y: 34, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1, stagger: 0.16 }, at + 0.4)
     .to(black, { autoAlpha: 1, duration: 0.7, ease: 'power1.in' }, at + D.endCard - 0.7);
 
+  cue('endCard', at);
+  cue('endItems', at + 0.4);
+  cue('fadeOut', at + D.endCard - 0.7);
   // Pin the exact total length (the last tween already ends here).
   tl.set({}, {}, at + D.endCard);
   return tl;
