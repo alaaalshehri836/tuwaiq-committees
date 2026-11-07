@@ -304,16 +304,13 @@ a {
   box-shadow: 0 0 6px var(--cyan);
 }
 
-/* Official logo badge — height-driven so its proportions are always preserved */
+/* Official logo (transparent PNG) — height-driven so its proportions are always preserved;
+   the glow follows the artwork's shape (no box, no border). */
 .brand-logo {
   display: block;
-  height: clamp(46px, 6.2svh, 60px);
+  height: clamp(38px, 5.2svh, 50px);
   width: auto;
-  border-radius: 18%;
-  border: 1px solid rgb(197 163 255 / 0.45);
-  box-shadow:
-    0 0 0 1px rgb(111 44 255 / 0.4),
-    0 0 20px rgb(155 92 255 / 0.5);
+  filter: drop-shadow(0 0 12px rgb(155 92 255 / 0.55)) drop-shadow(0 4px 10px rgb(8 6 17 / 0.6));
 }
 
 .status-pill {

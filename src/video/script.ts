@@ -9,11 +9,10 @@ export const VIDEO = { width: 1920, height: 1080, fps: 30 } as const;
 
 export const TEXT = {
   // Scene 1 — Entrance
-  kicker: 'نادي طويق بجامعة أم القرى',
+  kicker: 'نادي طويق',
   headline: 'فتح التسجيل في اللجان الإدارية',
   subline: 'اكتشف الفرص التي تنتظرك في طويق',
   // Scene 2/3 — Hall
-  hallKicker: 'اللجان الإدارية',
   hallTitle: 'خمسة أبواب.. خمس لجان',
   // Scene 4 — Finale
   paths: 'خمسة مسارات، وفرص متعددة للمساهمة',
@@ -22,8 +21,6 @@ export const TEXT = {
   cta: 'اختر لجنتك وابدأ رحلتك معنا',
   // Branding
   club: 'نادي طويق',
-  university: 'جامعة أم القرى',
-  deanship: 'عمادة شؤون الطلاب',
 } as const;
 
 /**
@@ -39,17 +36,16 @@ export const TAGLINES = {
 } as const;
 
 /**
- * Optional official logo files. Put the images in /public and set the
- * paths, e.g. uquLogo: './brand/uqu-logo.png'. Empty = text branding.
+ * Official Tuwaiq Club logo used by the video.
  */
 export const BRAND = {
   /**
    * Official Tuwaiq Club logo — used in the opening, the top bar and the end card.
-   * public/brand/tuwaiq-logo.png is the original upload; the badge file is a
-   * pixel-exact crop of it (excess purple canvas trimmed, nothing redrawn).
+   * public/brand/tuwaiq-logo.png is the original upload; the transparent file is
+   * extracted from it by scripts/brand/make-transparent-logo.py ("| UQU" and the
+   * purple plate removed, nothing redrawn).
    */
-  tuwaiqLogo: './brand/tuwaiq-logo-badge.png',
-  uquLogo: '',
+  tuwaiqLogo: './brand/tuwaiq-logo-transparent.png',
 };
 
 /**

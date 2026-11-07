@@ -1,8 +1,9 @@
 /**
- * Official Tuwaiq Club logo (public/brand/tuwaiq-logo.png, uploaded by the club).
- * The badge file is a pixel-exact crop of it — never redrawn or recolored.
+ * Official Tuwaiq Club logo, transparent version: extracted from the club's upload
+ * (public/brand/tuwaiq-logo.png) by scripts/brand/make-transparent-logo.py —
+ * "| UQU" and the purple plate removed, nothing redrawn.
  */
-const LOGO_SRC = './brand/tuwaiq-logo-badge.png';
+const LOGO_SRC = './brand/tuwaiq-logo-transparent.png';
 
 interface Props {
   onClick?: () => void;
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export function BrandLogo({ onClick, className = '' }: Props) {
-  const img = <img src={LOGO_SRC} alt="نادي طويق — Tuwaiq Club" className="brand-logo" width={465} height={365} />;
+  const img = <img src={LOGO_SRC} alt="نادي طويق — Tuwaiq Club" className="brand-logo" width={331} height={232} />;
   if (!onClick) return <span className={className}>{img}</span>;
   return (
     <button type="button" onClick={onClick} className={`wordmark-btn ${className}`} aria-label="نادي طويق — العودة للبداية">

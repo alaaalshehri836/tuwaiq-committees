@@ -139,10 +139,6 @@ export default function VideoApp() {
         <div data-v="hall" className="v-world">
           <Backdrop variant="hall" />
           <div className="v-hall-copy">
-            <p data-v="h-text" className="kicker v-kicker">
-              <span className="kicker__pix" aria-hidden="true" />
-              {TEXT.hallKicker}
-            </p>
             <h2 data-v="h-text" className="title-3d v-hall-title">
               {TEXT.hallTitle}
             </h2>
@@ -206,10 +202,7 @@ export default function VideoApp() {
             {BRAND.tuwaiqLogo ? <img src={BRAND.tuwaiqLogo} alt={TEXT.club} /> : <Wordmark className="v-wordmark-xl" />}
           </div>
           <p data-v="end-item" className="v-end__uni">
-            {BRAND.uquLogo && <img src={BRAND.uquLogo} alt={TEXT.university} />}
             <span>{TEXT.club}</span>
-            <span className="v-dot" />
-            <span>{TEXT.university}</span>
           </p>
           <p data-v="end-item" className="v-end__open">
             <span className="status-pill__dot" aria-hidden="true" />
@@ -223,14 +216,7 @@ export default function VideoApp() {
         <header data-v="header" className="v-header">
           <div className="v-header__brand">
             {BRAND.tuwaiqLogo ? <img src={BRAND.tuwaiqLogo} alt="" className="v-header__logo" /> : <Wordmark />}
-            <span className="v-header__sep" />
-            <span className="v-header__uni">
-              {TEXT.university}
-              <br />
-              <span>{TEXT.deanship}</span>
-            </span>
           </div>
-          {BRAND.uquLogo && <img src={BRAND.uquLogo} alt="" className="v-header__logo" />}
         </header>
 
         <div data-v="veil" className="v-veil" />

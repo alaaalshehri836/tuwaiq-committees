@@ -44,7 +44,7 @@ export function EntranceScene({ reduced, onEnter }: Props) {
           <div className="entrance-copy">
             <p data-a="kicker" className="kicker">
               <span className="kicker__pix" aria-hidden="true" />
-              نادي طويق بجامعة أم القرى
+              نادي طويق
             </p>
             <h1 id="entrance-title" className="title-3d entrance-title">
               {HEADLINE.map((w, i) => (

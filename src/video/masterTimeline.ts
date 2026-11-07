@@ -144,7 +144,8 @@ export function buildMasterTimeline(stage: HTMLElement, particles: ParticleState
     .to(hall, { ...cam(1, 0, 0), duration: 3.4, ease: 'power2.out' }, at)
     .to(slots, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.15 }, at + 0.5)
     .to(header, { autoAlpha: 1, duration: 1 }, at + 1)
-    .to(vAll('h-text'), { autoAlpha: 1, y: 0, duration: 1, stagger: 0.12 }, at + 1.1);
+    // title keeps its original entrance moment (it used to follow the removed kicker line by 0.12 s)
+    .to(vAll('h-text'), { autoAlpha: 1, y: 0, duration: 1 }, at + 1.22);
 
   /* ================= Scene 3 — The five committees ================= */
   at += D.hallReveal;

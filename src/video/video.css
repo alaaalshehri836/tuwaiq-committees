@@ -102,7 +102,7 @@ body {
 }
 /* official logo image: fixed height, natural proportions */
 .v-entrance-logo img {
-  height: 140px;
+  height: 112px;
 }
 .v-wordmark-md .wordmark__top {
   font-size: 46px;
@@ -158,7 +158,8 @@ body {
   gap: 16px;
 }
 .v-hall-title {
-  margin: 0;
+  /* the small kicker line above was removed: keep the title exactly where it was */
+  margin: 49px 0 0;
   font-size: 76px;
   line-height: 1.25;
 }
@@ -321,7 +322,7 @@ body {
   text-align: center;
 }
 .v-end__logo img {
-  height: 300px;
+  height: 210px;
 }
 .v-wordmark-xl .wordmark {
   filter: drop-shadow(0 0 40px rgb(155 92 255 / 0.65));
@@ -449,27 +450,18 @@ body {
   color: rgb(245 242 255 / 0.5);
 }
 .v-header__logo {
-  height: 86px;
+  height: 62px;
 }
-/* Official logo badge: natural proportions (width follows height), rounded
-   corners + neon edge so its purple field sits naturally in the scene. */
+/* Official logo (transparent PNG): natural proportions, glow follows the artwork's shape. */
 .v-entrance-logo img,
 .v-end__logo img,
 .v-header__logo {
   display: block;
   width: auto;
-  border-radius: 18%;
-  border: 1px solid rgb(197 163 255 / 0.45);
-  box-shadow:
-    0 0 0 1px rgb(111 44 255 / 0.4),
-    0 0 26px rgb(155 92 255 / 0.55),
-    0 14px 40px rgb(8 6 17 / 0.6);
+  filter: drop-shadow(0 0 18px rgb(155 92 255 / 0.55)) drop-shadow(0 6px 14px rgb(8 6 17 / 0.6));
 }
 .v-end__logo img {
-  box-shadow:
-    0 0 0 1px rgb(111 44 255 / 0.4),
-    0 0 50px rgb(155 92 255 / 0.6),
-    0 24px 60px rgb(8 6 17 / 0.7);
+  filter: drop-shadow(0 0 34px rgb(155 92 255 / 0.6)) drop-shadow(0 12px 28px rgb(8 6 17 / 0.7));
 }
 
 .v-veil {

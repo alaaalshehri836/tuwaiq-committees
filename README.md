@@ -62,7 +62,7 @@ It then takes a lossless screenshot and pipes it into FFmpeg (x264, CRF 16). Bec
 | All on-screen texts | `src/video/script.ts` → `TEXT` |
 | Length of each scene (total length = sum) | `src/video/script.ts` → `DURATIONS` |
 | Committee taglines (video only) | `src/video/script.ts` → `TAGLINES` |
-| Logos | `public/brand/tuwaiq-logo.png` is the official upload; `tuwaiq-logo-badge.png` is a pixel-exact crop used by the video (`BRAND.tuwaiqLogo`). An optional UQU logo goes in `BRAND.uquLogo`. |
+| Logo | `public/brand/tuwaiq-logo.png` is the official upload (source, unchanged). `tuwaiq-logo-transparent.png` is extracted from it by `python3 scripts/brand/make-transparent-logo.py` ("\| UQU" and the purple plate removed into a real alpha channel, nothing redrawn) and is used by both the website and the video. |
 | Committee names, taglines, colors, icons | `src/data/committees.ts` and `src/theme/palette.ts`. These are shared with the website. |
 | Camera moves, effects, offsets inside scenes | `src/video/masterTimeline.ts` (one section per scene) |
 | Video layout & type sizes | `src/video/video.css` |
